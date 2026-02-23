@@ -10,7 +10,7 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-    command: npm run dev
+    command: npx tsx watch src/server.ts
 
   db:
     image: postgres:15-alpine

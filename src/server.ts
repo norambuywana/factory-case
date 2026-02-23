@@ -1,10 +1,22 @@
-import http from "http";
-import app from "./app";
+import express from "express";
+import cors from "cors";
+import eventRoutes from "./routes/events";
 
 const PORT = process.env.PORT || 3000;
+const app = express();
 
-const httpServer = http.createServer(app);
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-httpServer.listen(PORT, () => {
+app.get('/ready', (req, res) => {
+  res.status(200).json({ status: 'ready' });
+});
+
+app.use("/api/events", eventRoutes);
+
+app.listen(PORT, () => {
   console.log(`✅ API running at http://localhost:${PORT}`);
 });
+
+export default app;

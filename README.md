@@ -13,8 +13,8 @@ Build and run docker containers
 ```bash
 docker compose up --build
 ```
-Build and run docker containers
+Run db migration in container 
 
 ```bash
-docker compose up --build
+docker compose exec api npx prisma migrate dev --name init
 ```
