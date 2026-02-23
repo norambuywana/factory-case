@@ -1,8 +1,10 @@
 import { EventSchema, EventInput } from "../models/event.model.js";
+import { EventProducer } from "../redis/eventProducer.js";
 import { EventRepository } from "../repositories/event.repository.js";
 
 export class EventService {
   private repo = new EventRepository();
+  private producer = new EventProducer();
 
   async handleIncomingEvent(payload: unknown) {
     // Validate
@@ -17,9 +19,9 @@ export class EventService {
       if (exists) throw new Error('Already processed');
     }
 
-    // Create event
-    const created = await this.repo.create(event);
+    // Publish event
+    await this.producer.produce(event);
 
-    return created;
+    return event;
   }
 }
