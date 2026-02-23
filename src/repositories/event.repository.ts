@@ -17,7 +17,7 @@ export class EventRepository {
     });
   }
 
-  async findByEquipment(equipmentId: string) {
+  async findByEquipmentId(equipmentId: string) {
     return prisma.event.findMany({
       where: { equipmentId },
       orderBy: { timestampServer: "desc" }

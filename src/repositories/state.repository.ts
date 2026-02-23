@@ -17,7 +17,7 @@ export class StateRepository {
     return prisma.currentState.findMany();
   }
 
-  async findByEquipment(equipmentId: string) {
+  async findByEquipmentId(equipmentId: string) {
     return prisma.currentState.findUnique({ 
         where: { equipmentId } 
     });
