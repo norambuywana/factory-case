@@ -16,5 +16,5 @@ docker compose up --build
 Run db migration in container 
 
 ```bash
-docker compose exec api npx prisma migrate dev --name init
+docker compose exec api npx prisma migrate deploy
 ```
