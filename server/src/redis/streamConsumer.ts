@@ -24,6 +24,7 @@ export class EventConsumer {
   }
 
   private async handleEvent(event: z.infer<typeof EventSchema>) {
+    console.info("Processing event:", event);
     if (!event.eventId) throw new Error("Missing event ID");
 
     const stateInput: StateInput = {

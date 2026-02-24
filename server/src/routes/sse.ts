@@ -14,6 +14,7 @@ router.get("/events/stream", async (req, res) => {
   res.write(": connected\n\n");
 
   const onMessage = () => {
+    console.info("Sending SSE update");
     res.write(`event: update\n`);
     res.write(`data: {"message":"state-changed"}\n\n`);
   };
@@ -22,6 +23,7 @@ router.get("/events/stream", async (req, res) => {
   redisSubscriber.on("message", onMessage);
 
   req.on("close", async () => {
+    console.info("Client disconnected from SSE stream");
     redisSubscriber.removeListener("message", onMessage);
     await redisSubscriber.unsubscribe("events_channel");
   });

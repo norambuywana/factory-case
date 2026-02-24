@@ -10,6 +10,7 @@ export class EventProducer {
   private repo = new EventRepository();
 
   async produce(event: EventInput) {
+    console.info("Producing event:", event);
     const saved = await this.repo.create(event);
     const streamId = await redis.xadd(
       STREAM_KEY,

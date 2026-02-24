@@ -56,6 +56,7 @@ export class StreamProcessor<T> {
   }
 
   private async handleMessage(id: string, fields: string[]) {
+    console.info(`Processing message ${id} with fields:`, fields);
     const raw = fields[1];
     let data: unknown;
 

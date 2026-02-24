@@ -14,12 +14,6 @@ export class EventService {
 
     const event = parsed.data as EventInput;
 
-    // Check duplicate
-    if (event.eventId) {
-      const exists = await this.repo.findById(event.eventId);
-      if (exists) throw new Error('Already processed');
-    }
-
     // Publish event
     await this.producer.produce(event);
 

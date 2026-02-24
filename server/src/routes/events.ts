@@ -5,6 +5,7 @@ const router = express.Router();
 const eventService = new EventService();
 
 router.post("/", async (req, res) => {
+  console.info("Received event:", req.body);
   try {
     const result = await eventService.handleIncomingEvent(req.body);
     
