@@ -7,9 +7,10 @@ export class EventService {
   private producer = new EventProducer();
 
   async handleIncomingEvent(payload: unknown) {
+    console.info("Received event:", payload);
     // Validate
     const parsed = EventSchema.safeParse(payload);
-    if (!parsed.success) throw new Error("Invalid event payload");
+    if (!parsed.success) throw new Error(`Invalid event payload: ${parsed.error.message}`);
 
     const event = parsed.data as EventInput;
 

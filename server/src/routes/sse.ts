@@ -1,10 +1,10 @@
-// src/routes/sse.ts
 import express from "express";
 import { redisSubscriber } from "../redis/redisClient.js";
 
 const router = express.Router();
 
 router.get("/events/stream", async (req, res) => {
+  console.info("Client connected to SSE stream");
   res.set({
     "Content-Type": "text/event-stream",
     "Cache-Control": "no-cache",
